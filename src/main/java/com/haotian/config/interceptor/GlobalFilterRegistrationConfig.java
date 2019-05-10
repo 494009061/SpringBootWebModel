@@ -1,6 +1,6 @@
 package com.haotian.config.interceptor;
 
-import com.hiynn.core.filter.HYDataSSOFilter;
+//import com.hiynn.core.filter.HYDataSSOFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -17,27 +17,27 @@ import org.springframework.core.Ordered;
  * @Date: 2019/4/19 14:08
  */
 @Configuration
-@PropertySource("classpath:conf/hydata-sso.properties")
+//@PropertySource("classpath:conf/hydata-sso.properties")
 public class GlobalFilterRegistrationConfig {
 
 
     /**
      * sso拦截器属性声明
       */
-    @Value("${hydata.sso.isOpen}")
+   /* @Value("${hydata.sso.isOpen}")
     public String hydataSsoIsOpen;
     @Value("${hydata.sso.serverUrl}")
     public String hydataSsoServerUrl;
     @Value("${hydata.sso.isCross}")
     public String hydataSsoIsCross;
     @Value("${hydata.sso.skipUris}")
-    public String hydataSsoSkipUris;
+    public String hydataSsoSkipUris;*/
 
     /**
      * SSO client 角色 拦截器 本demo 提供了sso 认证中心功能 正常使用中可分开使用
      * @return
      */
-    @Bean
+  /*  @Bean
     public FilterRegistrationBean ssoFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean(new HYDataSSOFilter());
         registration.addUrlPatterns("/*");
@@ -48,6 +48,6 @@ public class GlobalFilterRegistrationConfig {
         registration.setName("ssoFilter");
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE+2);
         return registration;
-    }
+    }*/
 
 }

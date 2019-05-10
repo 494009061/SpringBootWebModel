@@ -17,6 +17,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -107,10 +109,20 @@
         </dependency>
 
         <!--SSOClient 快速部署SDK -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.hiynn</groupId>
             <artifactId>HydataSSO-SDK</artifactId>
             <version>1.0.2</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
 
