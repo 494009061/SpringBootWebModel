@@ -109,11 +109,11 @@
         </dependency>
 
         <!--SSOClient 快速部署SDK -->
-        <!--<dependency>
+        <dependency>
             <groupId>com.hiynn</groupId>
             <artifactId>HydataSSO-SDK</artifactId>
             <version>1.0.2</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>commons-codec</groupId>
