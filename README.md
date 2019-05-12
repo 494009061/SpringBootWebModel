@@ -1,2 +1,2 @@
 # SpringBootModel
-开发模板项目
+Spring boot web应用项目模板
