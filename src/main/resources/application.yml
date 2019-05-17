@@ -1,0 +1,15 @@
+# http 容器
+server:
+  port: 8080
+
+# spring boot config
+spring:
+  application:
+    name: pspring.boot.web.model
+  profiles:
+    active: dev
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mappers/**/*Mapper.xml
+

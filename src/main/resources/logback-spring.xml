@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
     <!-- 项目名称 -->
-    <property name="PROJECT_NAME" value="springBootDemoFull"/>
-
-    <!--定义日志文件的存储地址后面拦截器用到，禁止使用相对路径-->
-    <property name="LOG_HOME" value="/logs"/>
+    <property name="PROJECT_NAME" value="spring-boot-web-model"/>
+    <!--日志目录-->
+    <property name="LOG_HOME" value="/var/logs"/>
+    <!--日志 路径-->
+    <property name="LOG_PATH" value="${LOG_HOME}/${PROJECT_NAME}"  />
 
     <!-- 控制台输出 -->
     <!--appender的name属性随意命名-->
@@ -26,7 +27,7 @@
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.info.%d{yyyyMMdd}.%i.log</FileNamePattern>
+            <FileNamePattern>${LOG_PATH}/info.%d{yyyyMMdd}.%i.log</FileNamePattern>
             <!--日志文件保留天数-->
             <MaxHistory>15</MaxHistory>
             <!--日志文件最大的大小-->
@@ -49,7 +50,7 @@
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志文件输出的文件名，如果按小时分割加入HH就行-->
-            <FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.error.%d{yyyyMMdd}.%i.log</FileNamePattern>
+            <FileNamePattern>${LOG_PATH}/error.%d{yyyyMMdd}.%i.log</FileNamePattern>
             <!--日志文件保留天数-->
             <MaxHistory>15</MaxHistory>
             <!--日志文件最大的大小-->
@@ -60,48 +61,29 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-
-    <!-- 自定义日志 -->
-    <appender name="OTHER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 过滤器，只打印INFO级别的日志 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!--日志文件输出的文件名-->
-            <FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.other.%d{yyyyMMdd}.%i.log</FileNamePattern>
-            <!--日志文件保留天数-->
-            <MaxHistory>15</MaxHistory>
-            <!--日志文件最大的大小-->
-            <MaxFileSize>10MB</MaxFileSize>
-        </rollingPolicy>
-
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %msg%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-    <!--自定义日志加入一个别名other 引用的 appender 为 OTHER我们上面的appender的name属性的value值 也就是说 在项目中 直接 getLogger("other") 即可-->
-    <logger name="other" additivity="true">
-        <appender-ref ref="OTHER"/>
-    </logger>
 
     <!-- 来发环境下的appender注册 -->
     <!--springProfile属性为 application.properties中spring.profiles.active属性的值 ： dev 或 prod -->
     <springProfile name="dev">
         <!--将appender'加入的springboot中 必须使用root节点注册 appender 如果appender没有指定日志级别将使用root的默认level属性级别-->
-        <root level="INFO">
+        <root level="debug">
             <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+    <springProfile name="test">
+        <root>
             <appender-ref ref="SYSTEM_INFO"/>
             <appender-ref ref="SYSTEM_ERROR"/>
         </root>
     </springProfile>
-
-    <!-- 生产环境下的appender注册 -->
-    <springProfile name="prod">
-        <root level="INFO">
+    <springProfile name="pre">
+        <root>
+            <appender-ref ref="SYSTEM_INFO"/>
+            <appender-ref ref="SYSTEM_ERROR"/>
+        </root>
+    </springProfile>
+    <springProfile name="pro">
+        <root>
             <appender-ref ref="SYSTEM_INFO"/>
             <appender-ref ref="SYSTEM_ERROR"/>
         </root>
