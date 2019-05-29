@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-public class SSOTest extends BaseTest {
+public class DemoTest extends BaseTest {
 
 
     @Test
