@@ -4,9 +4,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     # 方言可自动设置
     # 数据库url
-    url: "jdbc:mysql://localhost:3306/mydb?useSSL=false&characterEncoding=utf8"
+    url: "jdbc:mysql://localhost:3306/db_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
     username: "root"
-    password: "123456"
+    password: "root"
     # 初始化大小、最小、最大；
     druid:
       initial-size: 5

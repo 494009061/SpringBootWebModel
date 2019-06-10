@@ -6,13 +6,13 @@
     <version>1.0.0</version>
     <description>Model project for Spring Boot Web</description>
     <packaging>war</packaging>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.4.RELEASE</version>
         <relativePath/>
     </parent>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -149,7 +149,6 @@
 
     <build>
         <finalName>SpringBootWebModel</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

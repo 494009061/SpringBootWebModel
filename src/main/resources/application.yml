@@ -5,12 +5,18 @@ server:
 # spring boot config
 spring:
   application:
-    name: pspring.boot.web.model
+    name: "spring.boot.web.model"
   profiles:
     active: dev
+  jmx:
+    default-domain: "SpringBootWebModel"
+    server:
 
 # mybatis
 mybatis:
-  mapper-locations: classpath:mapper/**/*Mapper.xml,classpath*:com/haotian/**/**/mapper/*.xml
+  mapper-locations: classpath*:com/haotian/**/mapper/xml/*.xml
+  configuration:
+    # 自动驼峰转换
+    map-underscore-to-camel-case: true
 
 
