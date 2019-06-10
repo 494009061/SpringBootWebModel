@@ -1,22 +1,30 @@
 # http 容器
 server:
-  port: 8080
+  port: 80
+
+# 同一个jvm中如果跑多个任务 请修改appName 为不同的内容
+appName: "spring.boot.web.model"
 
 # spring boot config
 spring:
   application:
-    name: "spring.boot.web.model"
+    name: ${appName}
   profiles:
     active: dev
   jmx:
-    default-domain: "SpringBootWebModel"
-    server:
+    default-domain: ${appName}
+
 
 # mybatis
 mybatis:
-  mapper-locations: classpath*:com/haotian/**/mapper/xml/*.xml
+  # mapper 扫描
+  mapper-locations: classpath*:com/haotian/**/*Mapper.xml
+  # 别名扫描
+  type-aliases-package: com.haotian.development.entity
   configuration:
-    # 自动驼峰转换
+    # 下划线，驼峰转换
     map-underscore-to-camel-case: true
+    # 开发过程中去掉注释 打印 sql 到控制台
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 

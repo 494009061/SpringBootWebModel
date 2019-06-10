@@ -23,8 +23,9 @@
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
         <!--打包跳过测试-->
         <skipTests>true</skipTests>
-        <!--不需要web.xml-->
+        <!--不需要web.mapper-->
         <failOnMissingWebXml>false</failOnMissingWebXml>
+
     </properties>
 
     <dependencies>
@@ -155,5 +156,20 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>

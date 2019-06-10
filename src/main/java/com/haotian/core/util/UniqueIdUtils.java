@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class UniqueIdUtils {
 
 
-    public String getJavaUtilUUID() {
+    public static String getJavaUtilUUID() {
         StringBuilder sb = new StringBuilder();
         UUID uuid = UUID.randomUUID();
         StringTokenizer tokenizer = new StringTokenizer(uuid.toString(), "-", false);
@@ -26,7 +26,7 @@ public class UniqueIdUtils {
         return sb.toString();
     }
 
-    SimpleDateFormat DATA_FORMAT_yyyyMMddHHmmssSSS = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+
 
     /**
      * @Title: 有序
@@ -34,10 +34,11 @@ public class UniqueIdUtils {
      * @date: 2016年10月26日 下午4:20:13
      * @return: String length 32
      */
-    public String getSortNumber() {
+    public static String getSortNumber() {
         StringBuffer sb = new StringBuffer();
-        sb.append(DATA_FORMAT_yyyyMMddHHmmssSSS.format(System.currentTimeMillis()));
-        sb.append(createRadom(15, 0));
+        sb.append(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(System.currentTimeMillis()));
+        sb.append('-');
+        sb.append(createRadom(14, 0));
         return sb.toString();
     }
 
@@ -49,7 +50,7 @@ public class UniqueIdUtils {
      * @date: 2016年10月25日 下午4:18:23
      * @return: String
      */
-    public String createRadom(int iLen, int iType) {
+    public static String createRadom(int iLen, int iType) {
         StringBuffer sb = new StringBuffer("");
         Random rnd = new Random();
         if (iLen < 0) {
@@ -76,13 +77,13 @@ public class UniqueIdUtils {
     }
 
 
-    private AtomicInteger aiShort = new AtomicInteger(0);
-    private final int maxUnsignedShort = 255;
+    private static AtomicInteger aiShort = new AtomicInteger(0);
+    private static final int maxUnsignedShort = 255;
 
     /**
      * 单字节标识自增循环使用
      */
-    public int getUnsignedShort() {
+    public static int getUnsignedShort() {
         int next = aiShort.incrementAndGet();
         if (next > maxUnsignedShort) {
             synchronized (aiShort) {
@@ -98,11 +99,11 @@ public class UniqueIdUtils {
     }
 
 
-    private AtomicLong al = new AtomicLong(0);
+    private static AtomicLong al = new AtomicLong(0);
     /**
      * 序列 自增（保证原子性 (线程安全)）(高效) Max: 9223372036854775806
      */
-    public long getSequence() {
+    public static long getSequence() {
         long next = al.incrementAndGet();
         if (next > Long.MAX_VALUE) {
             synchronized (al) {

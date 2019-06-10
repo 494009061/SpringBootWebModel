@@ -66,22 +66,25 @@
     <!--springProfile属性为 application.properties中spring.profiles.active属性的值 ： dev 或 prod -->
     <springProfile name="dev">
         <!--将appender'加入的springboot中 必须使用root节点注册 appender 如果appender没有指定日志级别将使用root的默认level属性级别-->
-        <root level="debug">
+        <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
+
     <springProfile name="test">
         <root>
             <appender-ref ref="SYSTEM_INFO"/>
             <appender-ref ref="SYSTEM_ERROR"/>
         </root>
     </springProfile>
+
     <springProfile name="pre">
         <root>
             <appender-ref ref="SYSTEM_INFO"/>
             <appender-ref ref="SYSTEM_ERROR"/>
         </root>
     </springProfile>
+
     <springProfile name="pro">
         <root>
             <appender-ref ref="SYSTEM_INFO"/>
