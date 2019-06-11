@@ -1,9 +1,13 @@
 package com.haotian.core.util;
 
+import org.apache.commons.lang3.time.StopWatch;
+
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.UUID;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -25,7 +29,6 @@ public class UniqueIdUtils {
         }
         return sb.toString();
     }
-
 
 
     /**
@@ -100,6 +103,7 @@ public class UniqueIdUtils {
 
 
     private static AtomicLong al = new AtomicLong(0);
+
     /**
      * 序列 自增（保证原子性 (线程安全)）(高效) Max: 9223372036854775806
      */
@@ -117,4 +121,25 @@ public class UniqueIdUtils {
         }
         return next;
     }
+
+    public static ExecutorService newFixedThreadPool(int nThreads) {
+        return new ThreadPoolExecutor(nThreads, nThreads,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
+    }
+
+    public static void main(String[] args) {
+
+        StopWatch sw = new StopWatch();
+        sw.start();
+        for (int i = 0; i < 1000000; i++) {
+           getSortNumber();
+            //getJavaUtilUUID();
+        }
+        sw.stop();
+
+        System.out.println(sw.getTime());
+    }
+
+
 }

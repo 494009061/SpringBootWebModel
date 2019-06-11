@@ -21,7 +21,7 @@ import java.util.Map;
  * @Email zhangpeng@hiynn.com
  * @Date: 2019/4/19 14:38
  */
-@Api(tags = "认证操作相关接口")
+@Api(tags = "认证操作相关接口",description = "-")
 @RestController
 @RequestMapping("auth")
 public class AuthController {

@@ -19,12 +19,12 @@ spring:
 mybatis:
   # mapper 扫描
   mapper-locations: classpath*:com/haotian/**/*Mapper.xml
-  # 别名扫描
+  # 别名扫描的包
   type-aliases-package: com.haotian.development.entity
   configuration:
     # 下划线，驼峰转换
     map-underscore-to-camel-case: true
-    # 开发过程中去掉注释 打印 sql 到控制台
+    # 开发过程中使用重写日志实现 为了打印 mybatis 日志到 控制台
     #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 

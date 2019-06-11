@@ -18,19 +18,10 @@ public class Swagger2 {
 	@Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
+                .apiInfo(new ApiInfoBuilder().build())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.haotian"))
                 .paths(PathSelectors.any())
-                .build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("hello word")
-                .description("my description")
-                .termsOfServiceUrl("https://swagger.io")
-                .version("1.0")
                 .build();
     }
 
