@@ -41,7 +41,7 @@ public class UniqueIdUtils {
         StringBuffer sb = new StringBuffer();
         sb.append(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(System.currentTimeMillis()));
         sb.append('-');
-        sb.append(createRadom(14, 0));
+        sb.append(createRadom(14, 2));
         return sb.toString();
     }
 
@@ -132,12 +132,10 @@ public class UniqueIdUtils {
 
         StopWatch sw = new StopWatch();
         sw.start();
-        for (int i = 0; i < 1000000; i++) {
-           getSortNumber();
-            //getJavaUtilUUID();
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(getSortNumber());
         }
         sw.stop();
-
         System.out.println(sw.getTime());
     }
 
