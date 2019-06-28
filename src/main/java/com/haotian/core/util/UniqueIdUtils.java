@@ -53,7 +53,7 @@ public class UniqueIdUtils {
      * @date: 2016年10月25日 下午4:18:23
      * @return: String
      */
-    public static String createRadom(int iLen, int iType) {
+    private static String createRadom(int iLen, int iType) {
         StringBuffer sb = new StringBuffer("");
         Random rnd = new Random();
         if (iLen < 0) {

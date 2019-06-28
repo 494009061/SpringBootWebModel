@@ -24,4 +24,8 @@ public class DemoServiceImpl implements DemoService {
         entity.setId(id);
         return demoTestMapper.insertDemoTest(entity);
     }
+
+    public static void main(String[] args) {
+        System.out.println("123");
+    }
 }

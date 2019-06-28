@@ -13,7 +13,6 @@ import java.sql.SQLOutput;
 @Aspect
 @Component
 public class SysLogAop {
-
     private final Logger logger = LoggerFactory.getLogger(SysLogAop.class);
 
     @Around("@annotation(com.haotian.core.aop.annotation.SysLogByInsert)")

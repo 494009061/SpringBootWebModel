@@ -26,9 +26,10 @@ public class DemoController {
     private DemoService demoService;
 
     private Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
-
+    private  final Logger loggerOther = LoggerFactory.getLogger("other");
     @GetMapping("/")
     public String index() {
+        loggerOther.info("asdasdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         log.debug("{}", "input get index...");
         return "this is simple spring boot demo controller";
     }
