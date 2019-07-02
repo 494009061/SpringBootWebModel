@@ -1,11 +1,9 @@
-package com.haotian.config;
+package com.haotian.config.filter;
 
-//import com.hiynn.core.filter.HYDataSSOFilter;
-
-import com.haotian.config.filter.AccessLogFilter;
-import com.haotian.config.filter.CrossOriginFilter;
-import com.haotian.config.sso.HYDataSSOConfig;
-import com.hiynn.core.filter.HYDataSSOFilter;
+import com.haotian.config.filter.impl.AccessLogFilter;
+import com.haotian.config.filter.impl.CrossOriginFilter;
+import com.haotian.config.filter.impl.SsoClientFilter;
+import com.haotian.development.sso.client.service.SsoClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -40,23 +38,22 @@ public class GlobalFilterRegistrationConfig {
         return registration;
     }
 
+
     @Autowired
-    HYDataSSOConfig ssoConfig;
+    private SsoClientService ssoClientService;
     /**
-     * SSO client 角色 拦截器 本demo 提供了sso 认证中心功能 正常使用中可分开使用
+     * SSO client 角色 拦截器
      * @return
      */
     @Bean
     public FilterRegistrationBean ssoFilterRegistration() {
-
-        FilterRegistrationBean registration = new FilterRegistrationBean(new HYDataSSOFilter());
+        SsoClientFilter ssoClientFilter = new SsoClientFilter();
+        ssoClientFilter.setService(ssoClientService);
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(ssoClientFilter);
         registration.addUrlPatterns("/*");
-        registration.addInitParameter("isOpen",ssoConfig.getHydataSsoIsOpen());
-        registration.addInitParameter("serverUrl",ssoConfig.getHydataSsoServerUrl());
-        registration.addInitParameter("isCross",ssoConfig.getHydataSsoIsCross());
-        registration.addInitParameter("skipUris",ssoConfig.getHydataSsoSkipUris());
         registration.setName("ssoFilter");
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE+2);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
         return registration;
     }
 

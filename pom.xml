@@ -29,7 +29,14 @@
     </properties>
 
     <dependencies>
+
         <!--spring boot 核心 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--spring boot web 核心 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -96,18 +103,11 @@
         </dependency>
 
 
-        <!--SSO依赖 jwt-->
+        <!--SSO 验证 依赖 jwt-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
-        </dependency>
-
-        <!--SSOClient 快速部署SDK -->
-        <dependency>
-            <groupId>com.hiynn</groupId>
-            <artifactId>HydataSSO-SDK</artifactId>
-            <version>1.0.2</version>
         </dependency>
 
         <dependency>
@@ -132,6 +132,13 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
+        </dependency>
+
+        <!--json 操作-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
         </dependency>
 
         <!--test依赖包-->

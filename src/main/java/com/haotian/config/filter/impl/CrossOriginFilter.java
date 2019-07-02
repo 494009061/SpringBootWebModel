@@ -1,4 +1,4 @@
-package com.haotian.config.filter;
+package com.haotian.config.filter.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

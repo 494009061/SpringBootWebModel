@@ -12,13 +12,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * @ClassName: _UniqueIDKit
+ *  主键id 等 临时序列id 工具类
  * @author: 张朋
  * @date: 2016年10月25日 下午4:57:48
  */
 public class UniqueIdUtils {
 
 
+    /**
+     * uuid 去除-符号
+     * @return
+     */
     public static String getJavaUtilUUID() {
         StringBuilder sb = new StringBuilder();
         UUID uuid = UUID.randomUUID();
@@ -38,10 +42,9 @@ public class UniqueIdUtils {
      * @return: String length 32
      */
     public static String getSortNumber() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(System.currentTimeMillis()));
-        sb.append('-');
-        sb.append(createRadom(14, 2));
+        sb.append(createRadom(15, 2));
         return sb.toString();
     }
 
@@ -84,7 +87,7 @@ public class UniqueIdUtils {
     private static final int maxUnsignedShort = 255;
 
     /**
-     * 单字节标识自增循环使用
+     * 单字节标识自增循环使用0 ~ 255
      */
     public static int getUnsignedShort() {
         int next = aiShort.incrementAndGet();
@@ -121,23 +124,4 @@ public class UniqueIdUtils {
         }
         return next;
     }
-
-    public static ExecutorService newFixedThreadPool(int nThreads) {
-        return new ThreadPoolExecutor(nThreads, nThreads,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>());
-    }
-
-    public static void main(String[] args) {
-
-        StopWatch sw = new StopWatch();
-        sw.start();
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(getSortNumber());
-        }
-        sw.stop();
-        System.out.println(sw.getTime());
-    }
-
-
 }

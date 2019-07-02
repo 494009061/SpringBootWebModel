@@ -1,6 +1,14 @@
 package com.haotian.development.entity;
 
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.Alias;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 /**
  * @author: Mr.Zhang
@@ -9,9 +17,11 @@ import org.apache.ibatis.type.Alias;
  */
 @Alias("DemoTestEntity")
 public class DemoTest {
-
+    @NotNull(groups = {Update.class, Delete.class,Select.class},message = "id is Null")
     private String id;
 
+    @Pattern(regexp = "[\\d]{4}[-][\\d]{2}[-][\\d]{2}[\\s]{1}[\\d]{2}[:][\\d]{2}[:][\\d]{2}", message = "format error")
+    private String name;
 
     public String getId() {
         return id;
@@ -19,5 +29,13 @@ public class DemoTest {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

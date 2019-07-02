@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * xml工具包
+ * xml工具包 依赖xStream pom
  *
  * @author 张昊天
  */

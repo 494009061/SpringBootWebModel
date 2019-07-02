@@ -1,4 +1,4 @@
-package com.haotian.development.sso.component;
+package com.haotian.development.sso.server.component;
 
 
 import io.jsonwebtoken.*;

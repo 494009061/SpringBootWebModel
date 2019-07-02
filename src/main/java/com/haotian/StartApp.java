@@ -8,6 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @ServletComponentScan
@@ -21,4 +25,8 @@ public class StartApp extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(StartApp.class, args);
     }
+
+
+
+
 }
