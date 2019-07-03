@@ -1,8 +1,8 @@
 package com.haotian.config.filter;
 
-import com.haotian.config.filter.impl.AccessLogFilter;
-import com.haotian.config.filter.impl.CrossOriginFilter;
-import com.haotian.config.filter.impl.SsoClientFilter;
+import com.haotian.core.filter.AccessLogFilter;
+import com.haotian.core.filter.CrossOriginFilter;
+import com.haotian.core.filter.SsoClientFilter;
 import com.haotian.development.sso.client.service.SsoClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

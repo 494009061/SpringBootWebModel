@@ -11,7 +11,9 @@
     <!--appender的name属性随意命名-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %msg%n</pattern>
+            <pattern>
+                [%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread][%file:%line] - %msg%n
+            </pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -34,7 +36,9 @@
             <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %msg%n</pattern>
+            <pattern>
+                [%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread][%file:%line] - %msg%n
+            </pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -57,7 +61,9 @@
             <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %msg%n</pattern>
+            <pattern>
+                [%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread][%file:%line] - %msg%n
+            </pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -81,7 +87,9 @@
             <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %msg%n</pattern>
+            <pattern>
+                [%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread][%file:%line] - %msg%n
+            </pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>

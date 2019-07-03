@@ -114,6 +114,4 @@ public class JsonWebTokenUtils {
         Key key = MacProvider.generateKey(SignatureAlgorithm.HS512);
         return Base64.encodeBase64String(key.getEncoded());
     }
-
-
 }

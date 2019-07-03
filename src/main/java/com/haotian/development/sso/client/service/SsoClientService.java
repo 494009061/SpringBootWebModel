@@ -11,6 +11,6 @@ import java.io.IOException;
  */
 public interface SsoClientService {
 
- void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException;
+  void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException;
 
 }

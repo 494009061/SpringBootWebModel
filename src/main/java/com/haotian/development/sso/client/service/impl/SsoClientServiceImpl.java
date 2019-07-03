@@ -1,5 +1,7 @@
 package com.haotian.development.sso.client.service.impl;
 
+import com.haotian.core.entity.HttpResponse;
+import com.haotian.core.util.HttpUtils;
 import com.haotian.core.vo.BaseVO;
 import com.haotian.development.sso.client.Constant;
 import com.haotian.development.sso.client.service.SsoClientService;
@@ -8,9 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -19,7 +20,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,8 +47,6 @@ public class SsoClientServiceImpl implements SsoClientService {
     private boolean ssoClientIsCross;
     @Value("${sso.client.skipUris}")
     private String ssoClientSkipUris;
-
-    private RestTemplate restTemplate = new RestTemplate();
 
     private void info(String fux, Object... message) {
         if (logger.isInfoEnabled()) {
@@ -108,15 +106,18 @@ public class SsoClientServiceImpl implements SsoClientService {
                 String token = req.getHeader(Constant.TOKEN_KEY_CLIENT);
                 info("{}:{}", Constant.TOKEN_KEY_CLIENT, token);
                 if (null != token) {
-                    Map<String, String> params = new HashMap<>(16);
-                    params.put(Constant.TOKEN_KEY_CLIENT, token);
-                    ResponseEntity<BaseVO> response = restTemplate.postForEntity(ssoClientServerUrl, params, BaseVO.class);
+
+                    Map<String, String> param = new HashMap<>();
+                    param.put(Constant.TOKEN_KEY_CLIENT, token);
+                    HttpResponse response = HttpUtils.post(ssoClientServerUrl, param, HttpUtils.UTF8);
+
+
                     info("{}:{}", "authTokenResponse", response.toString());
-                    if (response.getStatusCode() == HttpStatus.OK) {
-                        BaseVO vo = response.getBody();
+                    if (response.getCode() == HttpStatus.OK.value()) {
+                        BaseVO<String> vo = response.toObject(BaseVO.class);
                         if (vo != null) {
                             if (BaseVO.Code.RETURN_CODE_SUCCESS.equals(vo.getReturnCode())) {
-                                resp.addHeader(Constant.TOKEN_KEY_SERVER, String.valueOf(vo.getData()));
+                                resp.addHeader(Constant.TOKEN_KEY_SERVER, vo.getData());
                                 filterChain.doFilter(servletRequest, resp);
                                 return;
                             }
@@ -126,6 +127,7 @@ public class SsoClientServiceImpl implements SsoClientService {
                 info("{}", "auth token error");
                 // 如果验证失败 等其他问题  返回回错误码 403 并拦截请求
                 try (PrintWriter writer = resp.getWriter();) {
+                    resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
                     writer.print(BaseVO.build().errorAuth());
                     resp.setStatus(HttpStatus.FORBIDDEN.value());
                 }

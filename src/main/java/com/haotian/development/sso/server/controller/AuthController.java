@@ -31,12 +31,12 @@ public class AuthController {
 
     @ApiOperation(value = "认证接口", notes = "三方工具包或三方JS脚本或三方拦截器使用的验证接口，认证通过返回新的token，认证失败则返回returnCode=\"003\"")
     @PostMapping("tokenAuth")
-    public BaseVO token(@ApiParam("需要验证的token字符串") @RequestParam String clientSsoToken) throws Exception {
-        boolean valid = jwtUtil.isValid(clientSsoToken);
+    public BaseVO token(@ApiParam("需要验证的token字符串") @RequestParam String ssoClientToken) throws Exception {
+        boolean valid = jwtUtil.isValid(ssoClientToken);
         // 认证成功，刷新token 并返回
-        if (null != clientSsoToken && valid) {
+        if (null != ssoClientToken && valid) {
             // 解析原有jwt的body信息
-            Map<String, Object> stringObjectMap = jwtUtil.parseJWTtoMap(clientSsoToken);
+            Map<String, Object> stringObjectMap = jwtUtil.parseJWTtoMap(ssoClientToken);
             // 刷新token过期时间
             String jwtString = jwtUtil.getJWTString(null, stringObjectMap);
 
