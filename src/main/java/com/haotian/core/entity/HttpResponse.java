@@ -19,7 +19,7 @@ public class HttpResponse {
 		this.code = code;
 	}
 
-	public String getStringMessage() throws Exception {
+	public String getStringMessage(){
 
 		if (message == null) {
 			return null;
@@ -47,7 +47,7 @@ public class HttpResponse {
 		throw new JSONException("The message must be a string of type json");
 	}
 
-	public byte[] getByteArrayMessage() throws Exception {
+	public byte[] getByteArrayMessage(){
 
 		if (message == null) {
 			return null;
