@@ -5,6 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiResponse;
 
 import java.io.Serializable;
 
@@ -66,7 +67,6 @@ public class BaseVO<T> implements Serializable {
     public static BaseVO build() {
         return new BaseVO();
     }
-
 
     public BaseVO success() {
         this.returnCode = Code.RETURN_CODE_SUCCESS;

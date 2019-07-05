@@ -25,7 +25,5 @@ public class DemoServiceImpl implements DemoService {
         return demoTestMapper.insertDemoTest(entity);
     }
 
-    public static void main(String[] args) {
-        System.out.println("123");
-    }
+
 }

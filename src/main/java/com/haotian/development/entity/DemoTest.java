@@ -17,10 +17,8 @@ import javax.validation.groups.Default;
  */
 @Alias("DemoTestEntity")
 public class DemoTest {
-    @NotNull(groups = {Update.class, Delete.class,Select.class},message = "id is Null")
     private String id;
 
-    @Pattern(regexp = "[\\d]{4}[-][\\d]{2}[-][\\d]{2}[\\s]{1}[\\d]{2}[:][\\d]{2}[:][\\d]{2}", message = "format error")
     private String name;
 
     public String getId() {

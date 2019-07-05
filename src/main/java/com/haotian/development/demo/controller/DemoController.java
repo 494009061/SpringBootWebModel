@@ -1,5 +1,6 @@
 package com.haotian.development.demo.controller;
 
+import com.haotian.core.util.HttpUtils;
 import com.haotian.core.vo.BaseVO;
 import com.haotian.development.demo.service.DemoService;
 import com.haotian.development.entity.DemoTest;
@@ -9,13 +10,17 @@ import org.apache.ibatis.annotations.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * simple demo controller
@@ -28,6 +33,7 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/demo")
 public class DemoController {
+
     @Autowired
     private DemoService demoService;
 
@@ -41,28 +47,29 @@ public class DemoController {
         return "this is simple spring boot demo controller";
     }
 
-    @GetMapping("/insert")
-    public BaseVO insert(@Validated({Insert.class}) DemoTest demoTest) {
+    @PostMapping("/postA")
+    public BaseVO<HashMap> postA(@RequestParam String name) {
         HashMap<String, String> hashMap = new HashMap<String, String>() {{
-            put("a", "a");
-            put("a1", "a1");
-            put("a2", "a2");
-
+            put("name",name);
         }};
-        return BaseVO.build().success().setData(hashMap);
+        return BaseVO.build().setData(hashMap);
     }
 
-
-    @GetMapping("/update")
-    public BaseVO update(@Validated({Update.class}) DemoTest demoTest) {
+    @PostMapping("/postB")
+    public BaseVO<HashMap> postB(@RequestBody String name,@RequestBody String namea) {
         HashMap<String, String> hashMap = new HashMap<String, String>() {{
-            put("a", "a");
-            put("a1", "a1");
-            put("a2", "a2");
-
+            put("name",name);
+            put("nameA",namea);
         }};
+        return BaseVO.build().setData(hashMap);
+    }
 
-        return BaseVO.build().success().setData(hashMap);
+    @PostMapping("/postC")
+    public BaseVO<HashMap> postC(String name) {
+        HashMap<String, String> hashMap = new HashMap<String, String>() {{
+            put("name",name);
+        }};
+        return new BaseVO<HashMap>().setData(hashMap);
     }
 
 }

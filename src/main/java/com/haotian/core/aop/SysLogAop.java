@@ -21,12 +21,14 @@ public class SysLogAop {
         logger.info("{}{}","aop for insert in",JSON.toJSONString(args));
         return (int) point.proceed(args);
     }
+
     @Around("@annotation(com.haotian.core.aop.annotation.SysLogByDelete)")
     public void aopForDelete(ProceedingJoinPoint point) throws Throwable {
         logger.info("{}","aop for delete in ");
         point.proceed();
         logger.info("{}","aop for delete out ");
     }
+
     @Around("@annotation(com.haotian.core.aop.annotation.SysLogByUpdate)")
     public void aopForUpdate(ProceedingJoinPoint point) throws Throwable {
         System.out.println("aop for update in ");
