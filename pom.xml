@@ -156,7 +156,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--快速开发-->
+        <!--快速开发 ide 需要安装对应插件 lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -169,10 +169,12 @@
     <build>
         <finalName>SpringBootWebModel</finalName>
         <plugins>
+            <!--添加spring  打包插件 可以在原有maven打包的包在此打包支持-jar 运行的war 包 也可以不添加-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -201,13 +203,14 @@
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
-                <filtering>true</filtering>
             </resource>
+
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>
+                <!--替换变量引用为直接引用 如 ${fieldName} 打包输出后 会替换成直接变量内容-->
                 <filtering>true</filtering>
             </resource>
         </resources>
