@@ -69,7 +69,6 @@
     </appender>
 
 
-
     <appender name="Other" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--过滤器，拦截级别日志 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
