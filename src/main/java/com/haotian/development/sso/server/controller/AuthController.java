@@ -40,9 +40,9 @@ public class AuthController {
             // 刷新token过期时间
             String jwtString = jwtUtil.getJWTString(null, stringObjectMap);
 
-            return BaseVO.build().setData(jwtString);
+            return BaseVO.success().setData(jwtString);
         }
-        return BaseVO.build().errorAuth();
+        return BaseVO.errorAuth();
     }
 
 

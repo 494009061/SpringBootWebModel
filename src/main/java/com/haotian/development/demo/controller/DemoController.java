@@ -48,28 +48,37 @@ public class DemoController {
     }
 
     @PostMapping("/postA")
-    public BaseVO<HashMap> postA(@RequestParam String name) {
-        HashMap<String, String> hashMap = new HashMap<String, String>() {{
+    public BaseVO postA(@RequestParam String name) {
+        HashMap<String, String> hashMap = new HashMap<String, String>() {
+            private static final long serialVersionUID = 4650738796925119538L;
+
+            {
             put("name",name);
         }};
-        return BaseVO.build().setData(hashMap);
+        return BaseVO.success().setData(hashMap);
     }
 
     @PostMapping("/postB")
-    public BaseVO<HashMap> postB(@RequestBody String name,@RequestBody String namea) {
-        HashMap<String, String> hashMap = new HashMap<String, String>() {{
+    public BaseVO postB(@RequestBody String name,@RequestBody String namea) {
+        HashMap<String, String> hashMap = new HashMap<String, String>() {
+            private static final long serialVersionUID = -8742217247434516981L;
+
+            {
             put("name",name);
             put("nameA",namea);
         }};
-        return BaseVO.build().setData(hashMap);
+        return BaseVO.success().setData(hashMap);
     }
 
     @PostMapping("/postC")
-    public BaseVO<HashMap> postC(String name) {
-        HashMap<String, String> hashMap = new HashMap<String, String>() {{
+    public BaseVO postC(String name) {
+        HashMap<String, String> hashMap = new HashMap<String, String>() {
+            private static final long serialVersionUID = -5094464811712478321L;
+
+            {
             put("name",name);
         }};
-        return new BaseVO<HashMap>().setData(hashMap);
+        return BaseVO.success().setData(hashMap);
     }
 
 }

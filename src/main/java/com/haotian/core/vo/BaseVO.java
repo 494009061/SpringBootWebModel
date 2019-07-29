@@ -5,18 +5,19 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiResponse;
 
 import java.io.Serializable;
 
 /**
+ * 只序列化不为null 字段  排除了字典类
+ *
  * @Author: zhangpeng
  * @Date: 2019/4/12 10:02
  * @email zhangpeng@hiynn.com
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "BaseVO", description = "返回的VO视图数据模型")
-public class BaseVO<T> implements Serializable {
+public class BaseVO implements Serializable {
 
     private static final long serialVersionUID = 4295924705096425656L;
 
@@ -52,46 +53,45 @@ public class BaseVO<T> implements Serializable {
 
 
     @ApiModelProperty(value = "数据")
-    private T data;
+    private Object data;
     @ApiModelProperty(value = "返回码")
     private String returnCode;
     @ApiModelProperty(value = "提示信息")
     private String returnMessage;
 
-    public BaseVO() {
-        this.returnCode = "001";
-        this.returnMessage = "成功接收请求，视图模型未初始化";
+    /**
+     * 禁止手动创建 强制要求自动初始化
+     */
+    private BaseVO() {
     }
 
-
-    public static BaseVO build() {
+    private static BaseVO build() {
         return new BaseVO();
     }
 
-    public BaseVO success() {
-        this.returnCode = Code.RETURN_CODE_SUCCESS;
-        this.returnMessage = Message.RETURN_CODE_SUCCESS_MSG;
-        return this;
+    public static BaseVO success() {
+        return build()
+                .setReturnCode(Code.RETURN_CODE_SUCCESS)
+                .setReturnMessage(Message.RETURN_CODE_SUCCESS_MSG);
     }
 
-    public BaseVO errorParam() {
-        this.returnCode = Code.RETURN_CODE_PARAM_ERROR;
-        this.returnMessage = Message.RETURN_CODE_PARAM_ERROR_MSG;
-        return this;
+    public static BaseVO errorParam() {
+        return build()
+                .setReturnCode(Code.RETURN_CODE_PARAM_ERROR)
+                .setReturnMessage(Message.RETURN_CODE_PARAM_ERROR_MSG);
     }
 
-    public BaseVO errorAuth() {
-        this.returnCode = Code.RETURN_CODE_AUTH_ERROR;
-        this.returnMessage = Message.RETURN_CODE_AUTH_ERROR_MSG;
-        return this;
+    public static BaseVO errorAuth() {
+        return build()
+                .setReturnCode(Code.RETURN_CODE_AUTH_ERROR)
+                .setReturnMessage(Message.RETURN_CODE_AUTH_ERROR_MSG);
     }
 
-    public BaseVO errorSystem() {
-        this.returnCode = Code.RETURN_CODE_SYS_ERROR;
-        this.returnMessage = Message.RETURN_CODE_SYS_ERROR_MSG;
-        return this;
+    public static BaseVO errorSystem() {
+        return build()
+                .setReturnCode(Code.RETURN_CODE_SYS_ERROR)
+                .setReturnMessage(Message.RETURN_CODE_SYS_ERROR_MSG);
     }
-
 
     public String getReturnCode() {
         return returnCode;
@@ -111,12 +111,15 @@ public class BaseVO<T> implements Serializable {
         return this;
     }
 
-    public T getData() {
-        return data;
+    public Object getData() {
+        return this.data;
     }
 
-    public BaseVO setData(T data) {
-        this.success();
+    public <T> T dataCast(Class<T> clazz) {
+       return clazz.cast(this.data);
+    }
+
+    public BaseVO setData(Object data) {
         this.data = data;
         return this;
     }

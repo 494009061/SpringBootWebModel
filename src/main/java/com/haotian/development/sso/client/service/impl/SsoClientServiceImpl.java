@@ -114,10 +114,10 @@ public class SsoClientServiceImpl implements SsoClientService {
 
                     info("{}:{}", "authTokenResponse", response.toString());
                     if (response.getCode() == HttpStatus.OK.value()) {
-                        BaseVO<String> vo = response.toObject(BaseVO.class);
+                        BaseVO vo = response.toObject(BaseVO.class);
                         if (vo != null) {
                             if (BaseVO.Code.RETURN_CODE_SUCCESS.equals(vo.getReturnCode())) {
-                                resp.addHeader(Constant.TOKEN_KEY_SERVER, vo.getData());
+                                resp.addHeader(Constant.TOKEN_KEY_SERVER,vo.dataCast(String.class));
                                 filterChain.doFilter(servletRequest, resp);
                                 return;
                             }
@@ -128,7 +128,7 @@ public class SsoClientServiceImpl implements SsoClientService {
                 // 如果验证失败 等其他问题  返回回错误码 403 并拦截请求
                 try (PrintWriter writer = resp.getWriter();) {
                     resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                    writer.print(BaseVO.build().errorAuth());
+                    writer.print(BaseVO.errorAuth());
                     resp.setStatus(HttpStatus.FORBIDDEN.value());
                 }
             }

@@ -20,9 +20,16 @@ import org.springframework.core.Ordered;
 @Configuration
 public class GlobalFilterRegistrationConfig {
 
+    private final SsoClientService ssoClientService;
+
+    @Autowired
+    public GlobalFilterRegistrationConfig(SsoClientService ssoClientService) {
+        this.ssoClientService = ssoClientService;
+    }
+
     @Bean
     public FilterRegistrationBean crossOriginFilter() {
-        FilterRegistrationBean registration = new FilterRegistrationBean(new CrossOriginFilter());
+        FilterRegistrationBean<CrossOriginFilter> registration = new FilterRegistrationBean<>(new CrossOriginFilter());
         registration.addUrlPatterns("/*");
         registration.setName("crossOriginFilter");
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
@@ -31,7 +38,7 @@ public class GlobalFilterRegistrationConfig {
 
     @Bean
     public FilterRegistrationBean accessLogFilter() {
-        FilterRegistrationBean registration = new FilterRegistrationBean(new AccessLogFilter());
+        FilterRegistrationBean<AccessLogFilter> registration = new FilterRegistrationBean<>(new AccessLogFilter());
         registration.addUrlPatterns("/*");
         registration.setName("accessLogFilter");
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
@@ -39,10 +46,9 @@ public class GlobalFilterRegistrationConfig {
     }
 
 
-    @Autowired
-    private SsoClientService ssoClientService;
     /**
      * SSO client 角色 拦截器
+     *
      * @return
      */
     @Bean
