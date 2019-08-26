@@ -117,7 +117,7 @@ public class SsoClientServiceImpl implements SsoClientService {
                         BaseVO vo = response.toObject(BaseVO.class);
                         if (vo != null) {
                             if (BaseVO.Code.RETURN_CODE_SUCCESS.equals(vo.getReturnCode())) {
-                                resp.addHeader(Constant.TOKEN_KEY_SERVER,vo.dataCast(String.class));
+                                resp.addHeader(Constant.TOKEN_KEY_SERVER, vo.dataCast(String.class));
                                 filterChain.doFilter(servletRequest, resp);
                                 return;
                             }

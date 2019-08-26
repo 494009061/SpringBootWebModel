@@ -19,7 +19,7 @@ import java.io.Serializable;
 @ApiModel(value = "BaseVO", description = "返回的VO视图数据模型")
 public class BaseVO implements Serializable {
 
-    private static final long serialVersionUID = 4295924705096425656L;
+    private static final long serialVersionUID = 487372126490651698L;
 
     /**
      * spring jackson 和 fastJson 不进行序列化
@@ -63,6 +63,10 @@ public class BaseVO implements Serializable {
      * 禁止手动创建 强制要求自动初始化
      */
     private BaseVO() {
+    }
+
+    private BaseVO(String returnMessage) {
+        this.setReturnMessage(returnMessage);
     }
 
     private static BaseVO build() {
@@ -115,17 +119,22 @@ public class BaseVO implements Serializable {
         return this.data;
     }
 
-    public <T> T dataCast(Class<T> clazz) {
-       return clazz.cast(this.data);
-    }
+
 
     public BaseVO setData(Object data) {
         this.data = data;
         return this;
     }
 
-    @Override
-    public String toString() {
+    public <T> T dataCast(Class<T> clazz) {
+        return clazz.cast(this.data);
+    }
+
+
+    public String toJSONString() {
         return JSON.toJSONString(this);
     }
+
+
+
 }
