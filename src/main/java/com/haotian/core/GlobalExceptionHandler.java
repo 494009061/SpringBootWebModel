@@ -116,7 +116,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateKeyException.class)
     public BaseVO handleDuplicateKeyException(DuplicateKeyException e) {
         log.error(e.getMessage(), e);
-        return  BaseVO.errorSystem().setReturnMessage("触发唯一索引");
+        return  BaseVO.errorSystem().setReturnMessage("主键重复");
     }
 
 
