@@ -111,6 +111,7 @@
 
     <springProfile name="test">
         <root>
+            <appender-ref ref="CONSOLE"/>
             <appender-ref ref="SYSTEM_INFO"/>
             <appender-ref ref="SYSTEM_ERROR"/>
         </root>

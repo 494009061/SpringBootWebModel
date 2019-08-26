@@ -110,31 +110,20 @@ public class GlobalExceptionHandler {
         if (defaultMessage == null) {
             defaultMessage = fieldError.getField() + ":" + "错误信息没有设置,请联系后台管理";
         }
-        return R.error(500, defaultMessage);
-    }
-
-    /**
-     * 自定义异常
-     */
-    @ExceptionHandler(RRException.class)
-    public R handleRRException(RRException e) {
-        R r = new R();
-        r.put("code", e.getCode());
-        r.put("msg", e.getMessage());
-        return r;
+        return BaseVO.errorParam().setReturnMessage(defaultMessage);
     }
 
     @ExceptionHandler(DuplicateKeyException.class)
-    public R handleDuplicateKeyException(DuplicateKeyException e) {
-        logger.error(e.getMessage(), e);
-        return R.error(555, "该名称已存在！");
+    public BaseVO handleDuplicateKeyException(DuplicateKeyException e) {
+        log.error(e.getMessage(), e);
+        return  BaseVO.errorSystem().setReturnMessage("触发唯一索引");
     }
 
 
     @ExceptionHandler(value = Throwable.class)
     @ResponseBody
-    public R allExceptionHandler(Throwable ex) {
-        logger.error("异常信息", ex);
-        return R.error(500, "后台处理异常:" + ex.getMessage());
+    public BaseVO allExceptionHandler(Throwable ex) {
+        log.error("异常信息", ex);
+        return  BaseVO.errorSystem().setReturnMessage("后台处理异常:" + ex.getMessage());
     }
 }
